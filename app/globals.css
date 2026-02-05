@@ -1,26 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===============================
+   DESIGN TOKENS — TAILWIND v4
+   =============================== */
+@theme {
+  /* Light */
+  --color-bg: #f9f4f4;
+  --color-surface: #ffffff;
+  --color-text: #5f5f5f;
+  --color-heading: #1c1c1c;
+  --color-accent: #1c1c1c;
+  --color-title: #1c1c1c;
+
+  /* Dark */
+  --color-bg-dark: #0b0b0b;
+  --color-surface-dark: #121212;
+  --color-text-dark: #a1a1aa;
+  --color-heading-dark: #ffffff;
+  --color-title-dark: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@custom-variant dark (&:is(.dark *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ===============================
+   BASE
+   =============================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark body {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+  }
+
+  h1, h2, h3 {
+    color: var(--color-heading);
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3 {
+    color: var(--color-heading-dark);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===============================
+   ANIMATIONS
+   =============================== */
+@keyframes profile-animate {
+  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+@keyframes scroll {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(3.75rem); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@layer utilities {
+  .animate-profile { animation: profile-animate 8s ease-in-out infinite; }
+  .animate-fade-up { animation: fade-up 0.8s ease-out both; }
+  .animate-scroll { animation: scroll 2s ease infinite; }
+  .animate-float { animation: float 20s ease-in-out infinite; }
+  
+  /* Timeline line utility */
+  .timeline-line {
+    background: linear-gradient(to bottom, var(--color-heading) 0%, transparent 100%);
+  }
+  .dark .timeline-line {
+    background: linear-gradient(to bottom, var(--color-heading-dark) 0%, transparent 100%);
+  }
 }
