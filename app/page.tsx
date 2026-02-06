@@ -1,4 +1,3 @@
-
 import Home from "@/components/Home/Home";
 import About from "@/components/About/About";
 import Skills from "@/components/Skills/Skills";
@@ -11,7 +10,6 @@ import BackgroundDecorations from "@/components/BackgroundDecorations";
 import Header from "@/components/Header/Header";
 import CTASection from "@/components/CTASection/page";
 
-
 export default function Page() {
   return (
     <>
@@ -22,8 +20,8 @@ export default function Page() {
       <Skills />
       <Services />
       <Qualification />
-      <Portfolio />
- <CTASection />
+      {/* <Portfolio /> */}
+      <CTASection />
       <Contact />
       <Footer />
     </>
