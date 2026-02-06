@@ -406,11 +406,299 @@
 //   </div>
 // );
 
+// "use client";
+
+// import { useTheme } from "next-themes";
+// import { useEffect, useState } from "react";
+// import { motion } from "framer-motion";
+// import {
+//   SiHtml5,
+//   SiCss3,
+//   SiJavascript,
+//   SiTypescript,
+//   SiReact,
+//   SiNextdotjs,
+//   SiTailwindcss,
+//   SiGit,
+//   SiNodedotjs,
+//   SiMongodb,
+//   SiPostgresql,
+//   SiGraphql,
+//   SiAmazonwebservices,
+//   SiDocker,
+//   SiFigma,
+//   SiPostman,
+//   SiLinux,
+//   SiApachekafka,
+//   SiPrisma,
+//   SiSupabase,
+//   SiVercel,
+//   SiGithubactions,
+// } from "react-icons/si";
+
+// import { FaServer } from "react-icons/fa";
+// import { Code2 } from "lucide-react";
+// import { DiRedis } from "react-icons/di";
+
+// const orbitSkills = {
+//   inner: [
+//     { name: "HTML5", Icon: SiHtml5, color: "#E34F26" },
+//     { name: "CSS3", Icon: SiCss3, color: "#1572B6" },
+//     { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
+//     { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+//   ],
+
+//   middle: [
+//     { name: "React", Icon: SiReact, color: "#61DAFB" },
+//     { name: "Next.js", Icon: SiNextdotjs, color: "#000000" },
+//     { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
+//     { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
+//     { name: "Git", Icon: SiGit, color: "#F05032" },
+//   ],
+
+//   outer: [
+//     { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
+//     { name: "PostgreSQL", Icon: SiPostgresql, color: "#336791" },
+//     { name: "Redis", Icon: DiRedis, color: "#DC382D" },
+//     { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+//     { name: "Vercel", Icon: SiVercel, color: "#000000" },
+//     { name: "Postman", Icon: SiPostman, color: "#FF6C37" },
+//   ],
+
+//   /** 🆕 EXTRA / ECOSYSTEM RING */
+//   extra: [
+//     { name: "Kafka", Icon: SiApachekafka, color: "#FFFFFF" },
+//     { name: "AWS", Icon: SiAmazonwebservices, color: "#FF9900" },
+//     { name: "GraphQL", Icon: SiGraphql, color: "#E10098" },
+//     { name: "Inngest", Icon: FaServer, color: "#6366F1" },
+//     { name: "Prisma", Icon: SiPrisma, color: "#187367" },
+//     { name: "Linux", Icon: SiLinux, color: "#F7DF1E" },
+//   ],
+// };
+
+// export default function SkillsOrbit() {
+//   const { resolvedTheme } = useTheme();
+//   const [mounted, setMounted] = useState(false);
+//   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+//   const [isPaused, setIsPaused] = useState(false);
+
+//   useEffect(() => setMounted(true), []);
+//   if (!mounted) return null;
+
+//   const isDark = resolvedTheme === "dark";
+
+//   const glowColor = hoveredSkill
+//     ? orbitSkills.inner.find((s) => s.name === hoveredSkill)?.color ||
+//       orbitSkills.middle.find((s) => s.name === hoveredSkill)?.color ||
+//       orbitSkills.outer.find((s) => s.name === hoveredSkill)?.color ||
+//       orbitSkills.extra.find((s) => s.name === hoveredSkill)?.color
+//     : null;
+
+//   const handleHover = (skill: string | null) => {
+//     setHoveredSkill(skill);
+//     setIsPaused(!!skill);
+//   };
+
+//   const renderOrbit = (
+//     skills: typeof orbitSkills.inner,
+//     size: number,
+//     duration: number,
+//     reverse = false,
+//     zIndex = 10,
+//   ) => (
+//     <motion.div
+//       animate={isPaused ? {} : { rotate: reverse ? -360 : 360 }}
+//       transition={{
+//         duration,
+//         ease: "linear",
+//         repeat: Infinity,
+//       }}
+//       className="absolute pointer-events-none"
+//       style={{ width: size, height: size, zIndex }}
+//     >
+//       {skills.map((skill, i) => {
+//         const angle = (i / skills.length) * 360;
+//         const isHovered = hoveredSkill === skill.name;
+//         const isAnyHovered = !!hoveredSkill;
+
+//         return (
+//           <div
+//             key={skill.name}
+//             className="absolute inset-0"
+//             style={{ transform: `rotate(${angle}deg)` }} // positioning ONLY
+//           >
+//             <div
+//               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
+//               style={{ transform: `rotate(-${angle}deg)` }}
+//             >
+//               {/* Counter-rotate against orbit animation */}
+//               <motion.div
+//                 className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
+//                 animate={isPaused ? {} : { rotate: reverse ? 360 : -360 }}
+//                 transition={{
+//                   duration,
+//                   ease: "linear",
+//                   repeat: Infinity,
+//                 }}
+//               >
+//                 <motion.div
+//                   onMouseEnter={() => handleHover(skill.name)}
+//                   onMouseLeave={() => handleHover(null)}
+//                   whileHover={{ scale: 1.3 }}
+//                   animate={{
+//                     scale: isAnyHovered && !isHovered ? 0.85 : 1,
+//                     opacity: isAnyHovered && !isHovered ? 0.4 : 1,
+//                   }}
+//                   transition={{ duration: 0.2 }}
+//                   className={`relative w-14 h-14 rounded-2xl flex items-center justify-center cursor-pointer backdrop-blur-sm border-2 transition-all duration-300
+//                     ${
+//                       isDark
+//                         ? "bg-[#1c1c1c]/80 border-white/10"
+//                         : "bg-white border-[#1c1c1c]/10"
+//                     }
+//                   `}
+//                   style={{
+//                     borderColor: isHovered ? skill.color : undefined,
+//                     backgroundColor: isHovered ? skill.color : undefined,
+//                     boxShadow: isHovered
+//                       ? `0 0 40px ${skill.color}, 0 0 80px ${skill.color}50`
+//                       : undefined,
+//                     zIndex: isHovered ? 50 : 10,
+//                   }}
+//                 >
+//                   <skill.Icon
+//                     className="w-7 h-7 transition-all duration-300"
+//                     style={{
+//                       color: isHovered
+//                         ? "#ffffff"
+//                         : isDark
+//                           ? "#9ca3af"
+//                           : "#6b7280",
+//                       filter: isHovered ? "none" : "grayscale(100%)",
+//                     }}
+//                   />
+
+//                   {/* Ripple */}
+//                   {isHovered && (
+//                     <motion.div
+//                       initial={{ scale: 1, opacity: 0.6 }}
+//                       animate={{ scale: 2.5, opacity: 0 }}
+//                       transition={{ duration: 1, repeat: Infinity }}
+//                       className="absolute inset-0 rounded-2xl border-2"
+//                       style={{ borderColor: skill.color }}
+//                     />
+//                   )}
+
+//                   {/* Tooltip */}
+//                   {isHovered && (
+//                     <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-black text-white text-xs font-bold whitespace-nowrap z-50">
+//                       {skill.name}
+//                       <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45" />
+//                     </div>
+//                   )}
+//                 </motion.div>
+//               </motion.div>
+//             </div>
+//           </div>
+//         );
+//       })}
+//     </motion.div>
+//   );
+
+//   return (
+//     <section id="skills" className="relative py-32 overflow-hidden">
+//       <div
+//         className={`absolute inset-0 transition-colors duration-500 bg-transparent`}
+//       />
+
+//       <motion.div
+//         animate={{
+//           opacity: hoveredSkill ? 0.15 : 0,
+//           scale: hoveredSkill ? 1.2 : 1,
+//         }}
+//         transition={{ duration: 0.4 }}
+//         className="absolute top-1/2 left-1/2 w-175 h-175 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+//         style={{
+//           background: glowColor
+//             ? `radial-gradient(circle, ${glowColor} 0%, transparent 60%)`
+//             : "transparent",
+//         }}
+//       />
+
+//       <div className="text-center mb-20 relative z-10">
+//         <h2
+//           className={`text-4xl lg:text-5xl font-bold mb-4 ${
+//             isDark ? "text-white" : "text-[#1c1c1c]"
+//           }`}
+//         >
+//           Skills & Technologies
+//         </h2>
+//         <p className={isDark ? "text-gray-400" : "text-text"}>
+//           Hover to explore
+//         </p>
+//       </div>
+
+//       <div className="relative h-175 flex items-center justify-center">
+//         <motion.div
+//           animate={{
+//             boxShadow:
+//               hoveredSkill && glowColor
+//                 ? `0 0 60px ${glowColor}20`
+//                 : "0 0 0 transparent",
+//           }}
+//           className={`absolute w-24 h-24 rounded-full flex items-center justify-center z-40 ${
+//             isDark
+//               ? "bg-white/10 border border-white/20"
+//               : "bg-[#1c1c1c] border border-[#1c1c1c]/20"
+//           }`}
+//         >
+//           <Code2 className="w-8 h-8 text-white" />
+//         </motion.div>
+
+//         {[280, 420, 580, 720].map((size, idx) => {
+//           const skill =
+//             idx === 0
+//               ? orbitSkills.inner.find((s) => s.name === hoveredSkill)
+//               : idx === 1
+//                 ? orbitSkills.middle.find((s) => s.name === hoveredSkill)
+//                 : idx === 2
+//                   ? orbitSkills.outer.find((s) => s.name === hoveredSkill)
+//                   : orbitSkills.extra.find((s) => s.name === hoveredSkill);
+
+//           const activeColor = skill?.color;
+
+//           return (
+//             <motion.div
+//               key={size}
+//               animate={{
+//                 borderColor: activeColor
+//                   ? activeColor
+//                   : isDark
+//                     ? "rgba(255,255,255,0.08)"
+//                     : "rgba(28,28,28,0.08)",
+//                 boxShadow: activeColor ? `0 0 20px ${activeColor}30` : "none",
+//               }}
+//               className="absolute rounded-full border pointer-events-none"
+//               style={{ width: size, height: size }}
+//             />
+//           );
+//         })}
+
+//         {renderOrbit(orbitSkills.inner, 280, 25, false, 30)}
+//         {renderOrbit(orbitSkills.middle, 420, 35, true, 20)}
+//         {renderOrbit(orbitSkills.outer, 580, 45, false, 10)}
+//         {renderOrbit(orbitSkills.extra, 720, 65, true, 10)}
+//       </div>
+//     </section>
+//   );
+// }
+
 "use client";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Code2 } from "lucide-react";
 import {
   SiHtml5,
   SiCss3,
@@ -429,16 +717,7 @@ import {
   SiFigma,
   SiPostman,
   SiLinux,
-  SiApachekafka,
-  SiPrisma,
-  SiSupabase,
-  SiVercel,
-  SiGithubactions,
 } from "react-icons/si";
-
-import { FaServer } from "react-icons/fa";
-import { Code2 } from "lucide-react";
-import { DiRedis } from "react-icons/di";
 
 const orbitSkills = {
   inner: [
@@ -447,7 +726,6 @@ const orbitSkills = {
     { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
     { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
   ],
-
   middle: [
     { name: "React", Icon: SiReact, color: "#61DAFB" },
     { name: "Next.js", Icon: SiNextdotjs, color: "#000000" },
@@ -455,26 +733,27 @@ const orbitSkills = {
     { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
     { name: "Git", Icon: SiGit, color: "#F05032" },
   ],
-
   outer: [
     { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
     { name: "PostgreSQL", Icon: SiPostgresql, color: "#336791" },
-    { name: "Redis", Icon: DiRedis, color: "#DC382D" },
-    { name: "Docker", Icon: SiDocker, color: "#2496ED" },
-    { name: "Vercel", Icon: SiVercel, color: "#000000" },
-    { name: "Postman", Icon: SiPostman, color: "#FF6C37" },
-  ],
-
-  /** 🆕 EXTRA / ECOSYSTEM RING */
-  extra: [
-    { name: "Kafka", Icon: SiApachekafka, color: "#FFFFFF" },
-    { name: "AWS", Icon: SiAmazonwebservices, color: "#FF9900" },
     { name: "GraphQL", Icon: SiGraphql, color: "#E10098" },
-    { name: "Inngest", Icon: FaServer, color: "#6366F1" },
-    { name: "Prisma", Icon: SiPrisma, color: "#187367" },
-    { name: "Linux", Icon: SiLinux, color: "#F7DF1E" },
+    { name: "AWS", Icon: SiAmazonwebservices, color: "#FF9900" },
+    { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+  ],
+  extra: [
+    { name: "Figma", Icon: SiFigma, color: "#F24E1E" },
+    { name: "Postman", Icon: SiPostman, color: "#FF6C37" },
+    { name: "Linux", Icon: SiLinux, color: "#FCC624" },
   ],
 };
+
+// Flatten all skills for mobile marquee
+const allSkills = [
+  ...orbitSkills.inner,
+  ...orbitSkills.middle,
+  ...orbitSkills.outer,
+  ...orbitSkills.extra,
+];
 
 export default function SkillsOrbit() {
   const { resolvedTheme } = useTheme();
@@ -488,10 +767,7 @@ export default function SkillsOrbit() {
   const isDark = resolvedTheme === "dark";
 
   const glowColor = hoveredSkill
-    ? orbitSkills.inner.find((s) => s.name === hoveredSkill)?.color ||
-      orbitSkills.middle.find((s) => s.name === hoveredSkill)?.color ||
-      orbitSkills.outer.find((s) => s.name === hoveredSkill)?.color ||
-      orbitSkills.extra.find((s) => s.name === hoveredSkill)?.color
+    ? allSkills.find((s) => s.name === hoveredSkill)?.color
     : null;
 
   const handleHover = (skill: string | null) => {
@@ -499,6 +775,7 @@ export default function SkillsOrbit() {
     setIsPaused(!!skill);
   };
 
+  // Desktop Orbital Render
   const renderOrbit = (
     skills: typeof orbitSkills.inner,
     size: number,
@@ -508,12 +785,8 @@ export default function SkillsOrbit() {
   ) => (
     <motion.div
       animate={isPaused ? {} : { rotate: reverse ? -360 : 360 }}
-      transition={{
-        duration,
-        ease: "linear",
-        repeat: Infinity,
-      }}
-      className="absolute pointer-events-none"
+      transition={{ duration, ease: "linear", repeat: Infinity }}
+      className="absolute pointer-events-none hidden lg:block"
       style={{ width: size, height: size, zIndex }}
     >
       {skills.map((skill, i) => {
@@ -525,21 +798,16 @@ export default function SkillsOrbit() {
           <div
             key={skill.name}
             className="absolute inset-0"
-            style={{ transform: `rotate(${angle}deg)` }} // positioning ONLY
+            style={{ transform: `rotate(${angle}deg)` }}
           >
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
               style={{ transform: `rotate(-${angle}deg)` }}
             >
-              {/* Counter-rotate against orbit animation */}
               <motion.div
                 className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
                 animate={isPaused ? {} : { rotate: reverse ? 360 : -360 }}
-                transition={{
-                  duration,
-                  ease: "linear",
-                  repeat: Infinity,
-                }}
+                transition={{ duration, ease: "linear", repeat: Infinity }}
               >
                 <motion.div
                   onMouseEnter={() => handleHover(skill.name)}
@@ -551,11 +819,7 @@ export default function SkillsOrbit() {
                   }}
                   transition={{ duration: 0.2 }}
                   className={`relative w-14 h-14 rounded-2xl flex items-center justify-center cursor-pointer backdrop-blur-sm border-2 transition-all duration-300
-                    ${
-                      isDark
-                        ? "bg-[#1c1c1c]/80 border-white/10"
-                        : "bg-white border-[#1c1c1c]/10"
-                    }
+                    ${isDark ? "bg-[#1c1c1c]/80 border-white/10" : "bg-white border-[#1c1c1c]/10"}
                   `}
                   style={{
                     borderColor: isHovered ? skill.color : undefined,
@@ -577,8 +841,6 @@ export default function SkillsOrbit() {
                       filter: isHovered ? "none" : "grayscale(100%)",
                     }}
                   />
-
-                  {/* Ripple */}
                   {isHovered && (
                     <motion.div
                       initial={{ scale: 1, opacity: 0.6 }}
@@ -588,8 +850,6 @@ export default function SkillsOrbit() {
                       style={{ borderColor: skill.color }}
                     />
                   )}
-
-                  {/* Tooltip */}
                   {isHovered && (
                     <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-black text-white text-xs font-bold whitespace-nowrap z-50">
                       {skill.name}
@@ -605,19 +865,89 @@ export default function SkillsOrbit() {
     </motion.div>
   );
 
-  return (
-    <section id="skills" className="relative py-32 overflow-hidden">
-      <div
-        className={`absolute inset-0 transition-colors duration-500 bg-transparent`}
-      />
+  // Mobile Marquee Row
+  const MarqueeRow = ({
+    skills,
+    direction = "left",
+    speed = 30,
+    isTop = false,
+  }: {
+    skills: typeof allSkills;
+    direction?: "left" | "right";
+    speed?: number;
+    isTop?: boolean;
+  }) => {
+    const duplicatedSkills = [...skills, ...skills, ...skills];
 
+    return (
+      <div
+        className={`relative overflow-hidden py-4 ${isTop ? "" : "opacity-60"}`}
+      >
+        <motion.div
+          animate={{
+            x: direction === "left" ? ["0%", "-33.33%"] : ["-33.33%", "0%"],
+          }}
+          transition={{
+            duration: speed,
+            ease: "linear",
+            repeat: Infinity,
+          }}
+          className="flex gap-6 w-max"
+        >
+          {duplicatedSkills.map((skill, i) => {
+            const isHovered = hoveredSkill === `${skill.name}-${i}`;
+
+            return (
+              <motion.div
+                key={`${skill.name}-${i}`}
+                onMouseEnter={() => handleHover(`${skill.name}-${i}`)}
+                onMouseLeave={() => handleHover(null)}
+                whileTap={{ scale: 0.95 }}
+                className={`shrink-0 w-20 h-20 rounded-2xl flex items-center justify-center border-2 transition-all duration-300
+                  ${isDark ? "bg-[#1c1c1c]/60 border-white/10" : "bg-white border-[#1c1c1c]/10"}
+                  ${isHovered ? "scale-110" : ""}
+                `}
+                style={{
+                  borderColor: isHovered ? skill.color : undefined,
+                  backgroundColor: isHovered ? skill.color : undefined,
+                  boxShadow: isHovered
+                    ? `0 0 30px ${skill.color}60`
+                    : undefined,
+                }}
+              >
+                <skill.Icon
+                  className="w-10 h-10 transition-all duration-300"
+                  style={{
+                    color: isHovered ? "#ffffff" : skill.color,
+                    filter: isHovered ? "none" : "grayscale(20%)",
+                  }}
+                />
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Gradient fade edges */}
+        <div
+          className={`absolute inset-y-0 left-0 w-20 pointer-events-none bg-linear-to-r ${isDark ? "from-[#0a0a0f]" : "from-[#faf9f7]"} to-transparent`}
+        />
+        <div
+          className={`absolute inset-y-0 right-0 w-20 pointer-events-none bg-linear-to-l ${isDark ? "from-[#0a0a0f]" : "from-[#faf9f7]"} to-transparent`}
+        />
+      </div>
+    );
+  };
+
+  return (
+    <section id="skills" className="relative py-20 lg:py-32 overflow-hidden">
+      {/* Background Glow */}
       <motion.div
         animate={{
           opacity: hoveredSkill ? 0.15 : 0,
           scale: hoveredSkill ? 1.2 : 1,
         }}
         transition={{ duration: 0.4 }}
-        className="absolute top-1/2 left-1/2 w-175 h-175 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        className="absolute top-1/2 left-1/2 w-150 h-150 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none hidden lg:block"
         style={{
           background: glowColor
             ? `radial-gradient(circle, ${glowColor} 0%, transparent 60%)`
@@ -625,32 +955,31 @@ export default function SkillsOrbit() {
         }}
       />
 
-      <div className="text-center mb-20 relative z-10">
+      {/* Header */}
+      <div className="text-center mb-12 lg:mb-20 relative z-10 px-4">
         <h2
-          className={`text-4xl lg:text-5xl font-bold mb-4 ${
-            isDark ? "text-white" : "text-[#1c1c1c]"
-          }`}
+          className={`text-3xl lg:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-[#1c1c1c]"}`}
         >
           Skills & Technologies
         </h2>
-        <p className={isDark ? "text-gray-400" : "text-text"}>
-          Hover to explore
+        <p
+          className={`text-base lg:text-lg ${isDark ? "text-gray-400" : "text-text"}`}
+        >
+          <span className="hidden lg:inline">Hover to explore</span>
+          <span className="lg:hidden">Swipe to explore</span>
         </p>
       </div>
 
-      <div className="relative h-175 flex items-center justify-center">
+      {/* DESKTOP: Orbital Layout */}
+      <div className="relative h-125 lg:h-175 hidden lg:flex items-center justify-center">
         <motion.div
           animate={{
             boxShadow:
               hoveredSkill && glowColor
-                ? `0 0 60px ${glowColor}20`
+                ? `0 0 60px ${glowColor}40`
                 : "0 0 0 transparent",
           }}
-          className={`absolute w-24 h-24 rounded-full flex items-center justify-center z-40 ${
-            isDark
-              ? "bg-white/10 border border-white/20"
-              : "bg-[#1c1c1c] border border-[#1c1c1c]/20"
-          }`}
+          className={`absolute w-24 h-24 rounded-full flex items-center justify-center z-40 ${isDark ? "bg-white/10 border border-white/20" : "bg-[#1c1c1c] border border-[#1c1c1c]/20"}`}
         >
           <Code2 className="w-8 h-8 text-white" />
         </motion.div>
@@ -665,18 +994,13 @@ export default function SkillsOrbit() {
                   ? orbitSkills.outer.find((s) => s.name === hoveredSkill)
                   : orbitSkills.extra.find((s) => s.name === hoveredSkill);
 
-          const activeColor = skill?.color;
-
           return (
             <motion.div
               key={size}
               animate={{
-                borderColor: activeColor
-                  ? activeColor
-                  : isDark
-                    ? "rgba(255,255,255,0.08)"
-                    : "rgba(28,28,28,0.08)",
-                boxShadow: activeColor ? `0 0 20px ${activeColor}30` : "none",
+                borderColor:
+                  skill?.color ||
+                  (isDark ? "rgba(255,255,255,0.08)" : "rgba(28,28,28,0.08)"),
               }}
               className="absolute rounded-full border pointer-events-none"
               style={{ width: size, height: size }}
@@ -687,7 +1011,23 @@ export default function SkillsOrbit() {
         {renderOrbit(orbitSkills.inner, 280, 25, false, 30)}
         {renderOrbit(orbitSkills.middle, 420, 35, true, 20)}
         {renderOrbit(orbitSkills.outer, 580, 45, false, 10)}
-        {renderOrbit(orbitSkills.extra, 720, 65, true, 10)}
+        {renderOrbit(orbitSkills.extra, 720, 55, true, 10)}
+      </div>
+
+      {/* MOBILE: Infinite Scroll Marquee */}
+      <div className="lg:hidden space-y-2">
+        <MarqueeRow
+          skills={allSkills.slice(0, 6)}
+          direction="left"
+          speed={25}
+          isTop
+        />
+        <MarqueeRow
+          skills={allSkills.slice(6, 12)}
+          direction="right"
+          speed={30}
+        />
+        <MarqueeRow skills={allSkills.slice(12)} direction="left" speed={28} />
       </div>
     </section>
   );

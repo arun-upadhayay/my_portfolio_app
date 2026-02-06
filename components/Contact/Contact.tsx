@@ -35,7 +35,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 lg:py-32">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto sm:px-6">
         {/* Section Header - Matches your other sections */}
         <div className="text-center mb-16">
           <h2 className={`text-3xl lg:text-4xl font-semibold mb-3 transition-colors duration-500

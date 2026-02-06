@@ -15,8 +15,8 @@ import { useTheme } from "next-themes";
 const educationData = [
   {
     title: "Computer Science Engineering",
-    subtitle: "University - Institute",
-    date: "2017 – 2021",
+    subtitle: "University - AKTU",
+    date: "2018 – 20212",
     icon: BookOpen,
   },
   {
@@ -69,7 +69,7 @@ export default function Qualification() {
       className="py-24 lg:py-40 relative overflow-hidden"
       id="qualification"
     >
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <div className="max-w-4xl mx-auto px-2 sm:px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2
@@ -87,10 +87,10 @@ export default function Qualification() {
         </div>
 
         {/* Tabs */}
-        <div className="flex justify-center mb-16 gap-12">
+        <div className="flex justify-center mb-16 gap-4 sm:gap-12">
           <button
             onClick={() => setToggleState(1)}
-            className={`flex items-center gap-3 text-xl font-medium px-6 py-3 rounded-2xl transition-all
+            className={`flex items-center gap-2 sm:gap-3 text-lg sm:text-xl font-medium px-4 sm:px-6 py-3 rounded-2xl transition-all
               ${
                 toggleState === 1
                   ? isDark
@@ -101,13 +101,14 @@ export default function Qualification() {
                   : "text-text hover:text-[#1c1c1c]"
               }`}
           >
-            <GraduationCap size={28} />
-            Education
+            <GraduationCap size={24} className="sm:w-7 sm:h-7" />
+            <span className="hidden sm:inline">Education</span>
+            <span className="sm:hidden">Edu</span>
           </button>
 
           <button
             onClick={() => setToggleState(2)}
-            className={`flex items-center gap-3 text-xl font-medium px-6 py-3 rounded-2xl transition-all
+            className={`flex items-center gap-2 sm:gap-3 text-lg sm:text-xl font-medium px-4 sm:px-6 py-3 rounded-2xl transition-all
               ${
                 toggleState === 2
                   ? isDark
@@ -118,13 +119,14 @@ export default function Qualification() {
                   : "text-text hover:text-[#1c1c1c]"
               }`}
           >
-            <Briefcase size={28} />
-            Experience
+            <Briefcase size={24} className="sm:w-7 sm:h-7" />
+            <span className="hidden sm:inline">Experience</span>
+            <span className="sm:hidden">Exp</span>
           </button>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
+        {/* Desktop Timeline - Hidden on mobile */}
+        <div className="hidden md:block relative">
           {/* ONE fixed center line */}
           <div
             className={`absolute left-1/2 top-0 -translate-x-1/2 w-px h-full
@@ -257,6 +259,97 @@ export default function Qualification() {
                           </div>
                         </>
                       )}
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Mobile Timeline - Hidden on desktop */}
+        <div className="md:hidden relative">
+          {/* Vertical line on left */}
+          <div
+            className={`absolute left-4 top-0 w-px h-full
+              ${isDark ? "bg-white/30" : "bg-[#1c1c1c]/30"}`}
+          />
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={toggleState}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-8"
+            >
+              {currentData.map((item, index) => {
+                const Icon = item.icon;
+                
+                return (
+                  <div
+                    key={index}
+                    className="relative flex gap-6 items-start"
+                  >
+                    {/* Dot and Icon */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          delay: index * 0.15 + 0.2,
+                          type: "spring",
+                        }}
+                        className={`w-8 h-8 rounded-full border-2 flex items-center justify-center
+                          ${
+                            isDark
+                              ? "bg-bg-dark border-white shadow-[0_0_0_4px_rgba(255,255,255,0.1)]"
+                              : "bg-bg border-[#1c1c1c] shadow-[0_0_0_4px_rgba(28,28,28,0.1)]"
+                          }`}
+                      >
+                        <Icon 
+                          size={14} 
+                          className={isDark ? "text-white" : "text-[#1c1c1c]"} 
+                        />
+                        <span
+                          className={`absolute inset-0 rounded-full animate-ping opacity-30
+                            ${isDark ? "bg-white" : "bg-[#1c1c1c]"}`}
+                        />
+                      </motion.div>
+                    </div>
+
+                    {/* Content Card */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.15 }}
+                      className={`flex-1 p-5 rounded-2xl
+                        ${
+                          isDark
+                            ? "bg-white/5 border border-white/10"
+                            : "bg-[#1c1c1c]/5 border border-[#1c1c1c]/10"
+                        }`}
+                    >
+                      <div
+                        className={`text-xs uppercase mb-1 tracking-wider
+                          ${isDark ? "text-gray-500" : "text-text"}`}
+                      >
+                        {item.subtitle}
+                      </div>
+                      <h3
+                        className={`text-lg font-semibold mb-2
+                          ${isDark ? "text-white" : "text-[#1c1c1c]"}`}
+                      >
+                        {item.title}
+                      </h3>
+                      <div
+                        className={`flex items-center gap-2 text-sm
+                          ${isDark ? "text-gray-400" : "text-text"}`}
+                      >
+                        <Calendar size={14} />
+                        {item.date}
+                      </div>
                     </motion.div>
                   </div>
                 );

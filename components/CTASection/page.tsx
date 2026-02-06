@@ -87,7 +87,7 @@ export default function CTASection() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto sm:px-6 text-center">
         {/* Badge - Your style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
