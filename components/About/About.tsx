@@ -40,7 +40,7 @@ export default function About() {
           <img
             src="/assets/about.jpg"
             alt="About"
-            className={`w-full aspect-[4/5] object-cover rounded-3xl
+            className={`w-full aspect-4/5 object-cover rounded-3xl
               ${
                 isDark
                   ? "shadow-[0_0_0_10px_rgba(255,255,255,0.05)]"
