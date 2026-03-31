@@ -111,7 +111,7 @@ export default function About() {
 
           {/* DOWNLOAD BUTTON */}
           <a
-            href="/assets/Arun-CV.pdf"
+            href="/assets/arun-resume.pdf"
             download
             className={`inline-flex items-center gap-2 px-6 sm:px-7 h-11 sm:h-12 rounded-xl text-sm font-medium transition-all duration-300 hover:opacity-90 hover:gap-3
               ${isDark ? "bg-white text-bg-dark" : "bg-[#1c1c1c] text-white"}

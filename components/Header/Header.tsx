@@ -76,7 +76,7 @@ const Header: React.FC = () => {
         <div className="ml-auto flex items-center gap-3">
           {/* Download Resume */}
           <a
-            href="/assets/Arun-CV.pdf"
+            href="/assets/arun-resume.pdf"
             download
             className={`hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium transition-all duration-300 hover:opacity-90
               ${resolvedTheme === 'dark'
