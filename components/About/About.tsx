@@ -102,10 +102,11 @@ export default function About() {
               isDark ? "text-gray-300" : "text-text"
             }`}
           >
-            Full-stack software engineer with 3+ years of experience delivering
-            scalable, enterprise-grade web applications. Specialized in modern
-            frontend frameworks and robust backend systems, with a strong focus
-            on performance, clean architecture, and user experience.
+            Full-stack developer with 3+ years of experience building production
+            fintech systems and web applications. Currently at Stakehub Infotech
+            engineering an order-matching platform that handles 1000+ daily
+            transactions — built on Next.js, Node.js, TypeScript, and PostgreSQL.
+            Strong focus on clean architecture, performance, and real-world impact.
           </p>
 
           {/* DOWNLOAD BUTTON */}

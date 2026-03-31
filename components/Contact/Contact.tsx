@@ -8,20 +8,20 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "arun@example.com",
-    link: "mailto:arun@example.com",
+    value: "arunupadhayay2000@gmail.com",
+    link: "mailto:arunupadhayay2000@gmail.com",
   },
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    value: "+91 999-888-7777",
-    link: "https://wa.me/919998887777",
+    value: "+91 9506497032",
+    link: "https://wa.me/919506497032",
   },
   {
     icon: Send,
-    title: "Messenger",
-    value: "user.fb",
-    link: "#",
+    title: "LinkedIn",
+    value: "linkedin.com/in/arun-upadhayay",
+    link: "https://linkedin.com/in/arun-upadhayay",
   },
 ];
 

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, Download } from "lucide-react";
 
 const navItems = [
   { text: "Home", href: "#home" },
@@ -73,7 +73,22 @@ const Header: React.FC = () => {
         </ul>
 
         {/* RIGHT – ACTIONS */}
-        <div className="ml-auto flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-3">
+          {/* Download Resume */}
+          <a
+            href="/assets/Arun-CV.pdf"
+            download
+            className={`hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium transition-all duration-300 hover:opacity-90
+              ${resolvedTheme === 'dark'
+                ? 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
+                : 'bg-[#1c1c1c] text-white hover:bg-[#2d2d2d]'
+              }
+            `}
+          >
+            <Download size={13} />
+            Resume
+          </a>
+
           <button
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className={`p-2 rounded-full transition

@@ -165,7 +165,7 @@ export default function CTASection() {
 
           {/* Secondary Button - Outline style */}
           <a
-            href="mailto:arun@example.com"
+            href="mailto:arunupadhayay2000@gmail.com"
             className={`group inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-medium transition-all duration-300 hover:scale-105
               ${isDark 
                 ? 'border border-white/30 text-white hover:bg-white/10' 

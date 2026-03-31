@@ -62,10 +62,10 @@ export default function Home() {
             </h2>
 
             <p className="mt-5 sm:mt-6 max-w-xl mx-auto lg:mx-0 text-sm sm:text-[15px] lg:text-[16px] leading-7 text-text dark:text-gray-300">
-              Passionate full-stack developer with 3+ years of experience
-              building scalable web applications. Specialized in React, Node.js,
-              and modern cloud technologies. I transform ideas into elegant,
-              high-performance solutions.
+              Full-stack developer with 3+ years of experience building
+              production-grade fintech systems. Currently engineering a
+              1000+ daily transaction order-matching platform at Stakehub
+              Infotech using Next.js, Node.js, TypeScript, and PostgreSQL.
             </p>
 
             <a

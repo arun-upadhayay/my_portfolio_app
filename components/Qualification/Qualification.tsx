@@ -5,7 +5,6 @@ import {
   GraduationCap,
   Briefcase,
   Calendar,
-  Sparkles,
   Award,
   BookOpen,
 } from "lucide-react";
@@ -14,43 +13,57 @@ import { useTheme } from "next-themes";
 
 const educationData = [
   {
-    title: "Computer Science Engineering",
-    subtitle: "University - AKTU",
-    date: "2018 – 20212",
+    title: "B.Tech – Computer Science Engineering",
+    subtitle: "AKTU University",
+    date: "2018 – 2022",
     icon: BookOpen,
+    highlights: ["Core CS fundamentals", "Data structures & algorithms", "Software engineering principles"],
   },
   {
-    title: "Full-Stack Development",
-    subtitle: "Online Certification",
-    date: "2020",
-    icon: Award,
-  },
-  {
-    title: "Cloud Architecture Training",
-    subtitle: "AWS / Azure Certification",
+    title: "Full Stack Web Development",
+    subtitle: "CodeHelp · Certificate Program",
     date: "2022",
-    icon: Sparkles,
+    icon: Award,
+    highlights: ["Complete MERN stack development", "REST APIs, auth, deployment", "Hands-on production projects"],
+  },
+  {
+    title: "Class XII – Science (PCM)",
+    subtitle: "SVM School",
+    date: "2018",
+    icon: GraduationCap,
+    highlights: [],
+  },
+  {
+    title: "Class X – CBSE",
+    subtitle: "SBSDVM School",
+    date: "2016",
+    icon: GraduationCap,
+    highlights: [],
   },
 ];
 
 const experienceData = [
   {
-    title: "Senior Full-Stack Developer",
-    subtitle: "Tech Solutions Inc.",
-    date: "2022 – Present",
+    title: "Software Engineer",
+    subtitle: "Stakehub Infotech Pvt. Ltd. · Jaipur",
+    date: "Oct 2024 – Present",
     icon: Briefcase,
+    highlights: [
+      "Built fintech order-matching platform on Node.js, TypeScript, PostgreSQL & Next.js — 1000+ daily transactions",
+      "Integrated JWT-based auth with role-based access control",
+      "Automated order processing via cron jobs; managed state with Redux & React Context",
+    ],
   },
   {
-    title: "Frontend Developer",
-    subtitle: "Digital Agency",
-    date: "2021 – 2022",
+    title: "Full Stack Developer",
+    subtitle: "Blurock Wealth Management",
+    date: "Jan 2023 – Oct 2024",
     icon: Briefcase,
-  },
-  {
-    title: "Junior Web Developer",
-    subtitle: "Startup Hub",
-    date: "2020 – 2021",
-    icon: Briefcase,
+    highlights: [
+      "Built and maintained scalable web apps with Node.js, Express.js, React.js, and MongoDB",
+      "Designed and documented RESTful APIs for frontend & third-party integrations",
+      "Led integration testing to maintain high code quality across releases",
+    ],
   },
 ];
 
@@ -194,25 +207,28 @@ export default function Qualification() {
                           </div>
                           <h3
                             className={`text-xl font-semibold mb-2
-                              ${
-                                isDark
-                                  ? "text-white"
-                                  : "text-[#1c1c1c]"
-                              }`}
+                              ${isDark ? "text-white" : "text-[#1c1c1c]"}`}
                           >
                             {item.title}
                           </h3>
                           <div
-                            className={`flex justify-end items-center gap-2 text-sm
-                              ${
-                                isDark
-                                  ? "text-gray-400"
-                                  : "text-text"
-                              }`}
+                            className={`flex justify-end items-center gap-2 text-sm mb-3
+                              ${isDark ? "text-gray-400" : "text-text"}`}
                           >
                             <Calendar size={14} />
                             {item.date}
                           </div>
+                          {"highlights" in item && item.highlights && (
+                            <ul className="space-y-1.5 text-left">
+                              {item.highlights.map((h, hi) => (
+                                <li key={hi} className={`text-xs leading-relaxed flex gap-2
+                                  ${isDark ? "text-gray-400" : "text-text"}`}>
+                                  <span className="mt-1.5 w-1 h-1 rounded-full shrink-0 bg-current opacity-50" />
+                                  {h}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </>
                       )}
                     </motion.div>
@@ -228,35 +244,34 @@ export default function Qualification() {
                         <>
                           <div
                             className={`text-sm uppercase mb-2
-                              ${
-                                isDark
-                                  ? "text-gray-500"
-                                  : "text-text"
-                              }`}
+                              ${isDark ? "text-gray-500" : "text-text"}`}
                           >
                             {item.subtitle}
                           </div>
                           <h3
                             className={`text-xl font-semibold mb-2
-                              ${
-                                isDark
-                                  ? "text-white"
-                                  : "text-[#1c1c1c]"
-                              }`}
+                              ${isDark ? "text-white" : "text-[#1c1c1c]"}`}
                           >
                             {item.title}
                           </h3>
                           <div
-                            className={`flex items-center gap-2 text-sm
-                              ${
-                                isDark
-                                  ? "text-gray-400"
-                                  : "text-text"
-                              }`}
+                            className={`flex items-center gap-2 text-sm mb-3
+                              ${isDark ? "text-gray-400" : "text-text"}`}
                           >
                             <Calendar size={14} />
                             {item.date}
                           </div>
+                          {"highlights" in item && item.highlights && (
+                            <ul className="space-y-1.5">
+                              {item.highlights.map((h, hi) => (
+                                <li key={hi} className={`text-xs leading-relaxed flex gap-2
+                                  ${isDark ? "text-gray-400" : "text-text"}`}>
+                                  <span className="mt-1.5 w-1 h-1 rounded-full shrink-0 bg-current opacity-50" />
+                                  {h}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </>
                       )}
                     </motion.div>
@@ -344,12 +359,23 @@ export default function Qualification() {
                         {item.title}
                       </h3>
                       <div
-                        className={`flex items-center gap-2 text-sm
+                        className={`flex items-center gap-2 text-sm mb-3
                           ${isDark ? "text-gray-400" : "text-text"}`}
                       >
                         <Calendar size={14} />
                         {item.date}
                       </div>
+                      {"highlights" in item && item.highlights && (
+                        <ul className="space-y-1.5">
+                          {item.highlights.map((h, hi) => (
+                            <li key={hi} className={`text-xs leading-relaxed flex gap-2
+                              ${isDark ? "text-gray-400" : "text-text"}`}>
+                              <span className="mt-1.5 w-1 h-1 rounded-full shrink-0 bg-current opacity-50" />
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </motion.div>
                   </div>
                 );
