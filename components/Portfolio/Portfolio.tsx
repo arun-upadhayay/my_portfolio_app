@@ -103,6 +103,29 @@ const projects = [
     featured: true,
   },
   {
+    id: 7,
+    slug: "nakshatra-jyotish",
+    title: "Nakshatra Jyotish",
+    category: "app",
+    projectType: "Product Platform",
+    screenshots: [
+      "/projects/nakshatra-jyotish/1.png",
+      "/projects/nakshatra-jyotish/2.png",
+      "/projects/nakshatra-jyotish/3.png",
+    ],
+    description:
+      "Astrology product website focused on spiritual guidance journeys, clear service presentation, and trust-building storytelling.",
+    demo: "https://nakshatra-jyotish.vercel.app/",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    impact: "Crafted to improve service discovery and user confidence through a calm, conversion-focused experience.",
+    results: [
+      { label: "UX", value: "Guided" },
+      { label: "Performance", value: "Fast" },
+      { label: "Deployment", value: "Vercel" },
+    ],
+    featured: true,
+  },
+  {
     id: 5,
     slug: "studynotion-lms",
     title: "StudyNotion – LMS",
@@ -607,12 +630,16 @@ function ProjectCard({
   index,
   isDark,
   onClick,
+  layoutClass = "",
 }: {
   project: Project;
   index: number;
   isDark: boolean;
   onClick: () => void;
+  layoutClass?: string;
 }) {
+  const [showMobileInfo, setShowMobileInfo] = useState(false);
+
   return (
     <motion.div
       layout
@@ -620,17 +647,28 @@ function ProjectCard({
       initial={{ opacity: 0, y: index % 2 === 0 ? 40 : -40 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
+      whileHover={{ y: -6 }}
       transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.05 }}
-      className={`group relative rounded-3xl overflow-hidden cursor-pointer transition-shadow duration-300
+      className={`group relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300
         ${isDark
-          ? "bg-white/5 border border-white/10 hover:bg-white/8 hover:border-white/20"
-          : "bg-white border border-[#1c1c1c]/10 hover:shadow-2xl"
+          ? "bg-white/5 border border-white/10 hover:border-white/25 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+          : "bg-white border border-[#1c1c1c]/10 hover:border-[#1c1c1c]/20 shadow-[0_10px_30px_rgba(28,28,28,0.08)]"
         }
-        ${project.caseStudy ? "md:col-span-2" : project.featured ? "" : ""}
+        ${layoutClass}
       `}
       onClick={onClick}
     >
-      {/* Screenshot — card shows first image, hover reveals nav */}
+      {/* Soft glow frame */}
+      <div
+        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none
+          ${isDark
+            ? "bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.12),transparent_45%)]"
+            : "bg-[radial-gradient(circle_at_80%_20%,rgba(28,28,28,0.08),transparent_45%)]"
+          }
+        `}
+      />
+
+      {/* Screenshot area */}
       <div className={`relative overflow-hidden ${project.caseStudy ? "aspect-2/1" : "aspect-video"}`}>
         <ImageCarousel
           screenshots={project.screenshots}
@@ -638,6 +676,8 @@ function ProjectCard({
           isDark={isDark}
           aspectClass="h-full w-full"
         />
+
+        <div className="absolute inset-0 bg-linear-to-t from-black/45 via-black/10 to-transparent pointer-events-none" />
 
         {/* Badges */}
         {project.featured && (
@@ -657,30 +697,51 @@ function ProjectCard({
           {project.projectType}
         </div>
 
-        {/* Hover overlay — Visit Site CTA */}
-        <div
-          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none
-            ${isDark ? "bg-linear-to-t from-black/70 via-transparent to-transparent" : "bg-linear-to-t from-white/80 via-transparent to-transparent"}
-          `}
-        />
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300 z-10 pointer-events-none group-hover:pointer-events-auto">
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-105
-              ${isDark ? "bg-white text-black" : "bg-[#1c1c1c] text-white"}
+        {/* Desktop hover action panel */}
+        <div className="absolute inset-x-3 bottom-3 hidden md:block opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 z-10 pointer-events-none group-hover:pointer-events-auto">
+          <div
+            className={`rounded-2xl p-3 border backdrop-blur-md
+              ${isDark ? "bg-black/55 border-white/20" : "bg-white/90 border-[#1c1c1c]/10"}
             `}
           >
-            Visit Site <ExternalLink size={14} />
-          </a>
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <p className={`text-[11px] uppercase tracking-wider ${isDark ? "text-white/65" : "text-[#1c1c1c]/60"}`}>
+                Stack Preview
+              </p>
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className={`inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border transition-colors
+                  ${isDark
+                    ? "border-white/30 text-white hover:bg-white/10"
+                    : "border-[#1c1c1c]/20 text-[#1c1c1c] hover:bg-[#1c1c1c]/5"
+                  }
+                `}
+              >
+                Open Live <ExternalLink size={12} />
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {project.tags.slice(0, 4).map((tag, idx) => (
+                <span
+                  key={idx}
+                  className={`text-[10px] px-2 py-1 rounded-full
+                    ${isDark ? "bg-white/15 text-white/85" : "bg-[#1c1c1c]/10 text-[#1c1c1c]/85"}
+                  `}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Card content */}
-      <div className="p-5">
-        <h3 className={`text-lg font-semibold mb-1.5 ${isDark ? "text-white" : "text-[#1c1c1c]"}`}>
+      <div className="p-5 md:p-6">
+        <h3 className={`text-lg md:text-xl font-semibold mb-1.5 ${isDark ? "text-white" : "text-[#1c1c1c]"}`}>
           {project.title}
         </h3>
         <p className={`text-sm mb-4 line-clamp-2 ${isDark ? "text-gray-400" : "text-text"}`}>
@@ -689,8 +750,8 @@ function ProjectCard({
 
         {/* Results */}
         <div
-          className={`grid grid-cols-3 gap-1.5 mb-4 rounded-2xl p-1.5
-            ${isDark ? "bg-white/5" : "bg-[#1c1c1c]/5"}
+          className={`grid grid-cols-3 gap-1.5 mb-4 rounded-2xl p-1.5 border
+            ${isDark ? "bg-white/5 border-white/10" : "bg-[#1c1c1c]/5 border-[#1c1c1c]/10"}
           `}
         >
           {project.results.map((item) => (
@@ -707,7 +768,7 @@ function ProjectCard({
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {project.tags.slice(0, 3).map((tag, idx) => (
             <span
               key={idx}
@@ -724,12 +785,87 @@ function ProjectCard({
             </span>
           )}
         </div>
+
+        <div className="hidden md:flex items-center justify-between gap-3">
+          <p className={`text-xs ${isDark ? "text-white/45" : "text-[#1c1c1c]/45"}`}>
+            Hover card to preview stack
+          </p>
+          <div
+            className={`inline-flex items-center gap-1.5 text-xs font-medium
+              ${isDark ? "text-white/70" : "text-[#1c1c1c]/70"}
+            `}
+          >
+            Open Details <ArrowRight size={14} />
+          </div>
+        </div>
+
+        <div className="mt-3 md:hidden">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowMobileInfo((prev) => !prev);
+            }}
+            className={`w-full text-xs px-3 py-2 rounded-xl border transition-colors
+              ${isDark
+                ? "border-white/20 text-white/80 hover:bg-white/10"
+                : "border-[#1c1c1c]/20 text-[#1c1c1c]/80 hover:bg-[#1c1c1c]/5"
+              }
+            `}
+          >
+            {showMobileInfo ? "Hide Tech Details" : "Tap to View Tech Details"}
+          </button>
+
+          {showMobileInfo && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className={`mt-2 rounded-2xl p-3 border
+                ${isDark ? "bg-white/5 border-white/15" : "bg-[#1c1c1c]/5 border-[#1c1c1c]/10"}
+              `}
+            >
+              <p className={`text-[11px] uppercase tracking-wider mb-2 ${isDark ? "text-white/60" : "text-[#1c1c1c]/60"}`}>
+                Tech Used
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                {project.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className={`text-[10px] px-2 py-1 rounded-full
+                      ${isDark ? "bg-white/10 text-white/85" : "bg-[#1c1c1c]/10 text-[#1c1c1c]/85"}
+                    `}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p className={`text-[11px] leading-relaxed ${isDark ? "text-white/75" : "text-[#1c1c1c]/75"}`}>
+                {project.impact}
+              </p>
+
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className={`mt-3 inline-flex w-full items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium
+                  ${isDark ? "bg-white text-black" : "bg-[#1c1c1c] text-white"}
+                `}
+              >
+                Open Live Site <ExternalLink size={13} />
+              </a>
+            </div>
+          )}
+        </div>
+
+        <p className={`mt-3 md:hidden text-xs ${isDark ? "text-white/45" : "text-[#1c1c1c]/45"}`}>
+          Tap to view stack details. Tap card for full project details.
+        </p>
       </div>
 
       {/* Hover border glow */}
       <div
         className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none
-          ${isDark ? "shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]" : "shadow-[inset_0_0_0_1px_rgba(28,28,28,0.08)]"}
+          ${isDark ? "shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)]" : "shadow-[inset_0_0_0_1px_rgba(28,28,28,0.12)]"}
         `}
       />
     </motion.div>
@@ -750,6 +886,31 @@ export default function Portfolio() {
   const filteredProjects =
     filter === "all" ? projects : projects.filter((p) => p.category === filter);
 
+  const allProjectsLayout = [
+    { slug: "stakehub-main", className: "lg:col-span-4" },
+    { slug: "stakehub-product", className: "lg:col-span-2" },
+    { slug: "shree-deepak-industries", className: "lg:col-span-3" },
+    { slug: "deepak-roofing", className: "lg:col-span-3" },
+    { slug: "nakshatra-jyotish", className: "lg:col-span-2" },
+    { slug: "studynotion-lms", className: "lg:col-span-2" },
+    { slug: "stocks-watchlist", className: "lg:col-span-2" },
+  ];
+
+  const arrangedProjects =
+    filter === "all"
+      ? [
+          ...allProjectsLayout
+            .map((layout) => {
+              const project = filteredProjects.find((p) => p.slug === layout.slug);
+              return project ? { project, className: layout.className } : null;
+            })
+            .filter((item): item is { project: Project; className: string } => item !== null),
+          ...filteredProjects
+            .filter((p) => !allProjectsLayout.some((layout) => layout.slug === p.slug))
+            .map((project) => ({ project, className: "lg:col-span-2" })),
+        ]
+      : filteredProjects.map((project) => ({ project, className: "" }));
+
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden" id="portfolio">
       {/* Background blobs */}
@@ -766,28 +927,39 @@ export default function Portfolio() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <span
+            className={`inline-flex mb-4 px-4 py-1.5 rounded-full text-[11px] uppercase tracking-[0.2em] border
+              ${isDark ? "border-white/20 text-white/60" : "border-[#1c1c1c]/15 text-[#1c1c1c]/55"}
+            `}
+          >
+            Selected Work
+          </span>
           <h2 className={`text-3xl lg:text-5xl font-semibold mb-4 ${isDark ? "text-white" : "text-[#1c1c1c]"}`}>
             Portfolio
           </h2>
-          <p className={`text-base ${isDark ? "text-gray-400" : "text-text"}`}>
-            Live Products and Client Websites
+          <p className={`text-base max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-text"}`}>
+            Product builds and client launches designed for speed, clarity, and measurable outcomes.
           </p>
         </motion.div>
 
         {/* Filter buttons */}
-        <div className="flex justify-center gap-3 mb-12 flex-wrap">
+        <div
+          className={`mb-12 mx-auto w-fit p-1.5 rounded-2xl border flex justify-center gap-2 flex-wrap
+            ${isDark ? "bg-white/5 border-white/10" : "bg-white/80 border-[#1c1c1c]/10"}
+          `}
+        >
           {filters.map((f) => (
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`px-6 py-3 rounded-2xl font-medium transition-all duration-300
+              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300
                 ${filter === f.key
                   ? isDark
                     ? "bg-white text-bg-dark shadow-lg shadow-white/10"
                     : "bg-[#1c1c1c] text-white shadow-lg shadow-black/10"
                   : isDark
-                    ? "bg-white/5 text-white border border-white/10 hover:bg-white/10"
-                    : "bg-white text-[#1c1c1c] border border-[#1c1c1c]/10 hover:bg-[#1c1c1c]/5"
+                    ? "text-white/80 hover:bg-white/10"
+                    : "text-[#1c1c1c]/75 hover:bg-[#1c1c1c]/5"
                 }
               `}
             >
@@ -800,16 +972,17 @@ export default function Portfolio() {
         <motion.div
           layout
           transition={{ layout: { duration: 0.5, ease: "easeInOut" } }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className={`grid gap-6 ${filter === "all" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-6" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}`}
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
+            {arrangedProjects.map(({ project, className }, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 index={index}
                 isDark={isDark}
                 onClick={() => setSelectedProject(project)}
+                layoutClass={className}
               />
             ))}
           </AnimatePresence>
