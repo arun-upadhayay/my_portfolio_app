@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header/Header";
 import BackgroundDecorations from "@/components/BackgroundDecorations";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const poppins = Poppins({
   weight: ["400", "500", "600"],
@@ -92,9 +95,10 @@ export default function RootLayout({
               description:
                 "Full Stack Software Engineer specializing in React, Next.js, Node.js, and modern web technologies.",
               sameAs: [
-                "https://github.com/your-username",
-                "https://www.linkedin.com/in/your-profile",
-                "https://twitter.com/your-handle",
+                "https://github.com/arun-upadhayay",
+                "https://www.linkedin.com/in/arun-upadhayay",
+                "https://twitter.com/arun__upadhayay",
+                "https://www.instagram.com/arun__upadhayay",
               ],
               knowsAbout: [
                 "JavaScript",
@@ -159,6 +163,24 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto px-6">{children}</div>
           </main>
         </ThemeProvider>
+
+        {/* Google Analytics 4 — loaded after page is interactive so it never blocks rendering */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );

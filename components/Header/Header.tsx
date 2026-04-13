@@ -14,14 +14,11 @@ const navItems = [
 ];
 
 const Header: React.FC = () => {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => setMounted(true), []);
-
-  // Debug: Check if theme is working
-  console.log("Current theme:", theme, "Resolved:", resolvedTheme);
 
   if (!mounted) {
     // Prevent hydration mismatch - render neutral colors initially

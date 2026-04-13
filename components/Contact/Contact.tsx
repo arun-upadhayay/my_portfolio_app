@@ -113,21 +113,22 @@ export default function Contact() {
               {/* Name Input */}
               <div className="relative">
                 <input
+                  id="contact-name"
                   type="text"
                   placeholder=" "
                   className={`peer w-full h-14 rounded-xl border px-5 text-sm outline-none transition-all duration-300 bg-transparent
-                    ${isDark 
-                      ? 'border-white/20 text-white focus:border-white placeholder:text-transparent' 
+                    ${isDark
+                      ? 'border-white/20 text-white focus:border-white placeholder:text-transparent'
                       : 'border-[#1c1c1c]/20 text-[#1c1c1c] focus:border-[#1c1c1c] placeholder:text-transparent'
                     }
                   `}
                 />
-                <label className={`absolute left-5 transition-all duration-300 pointer-events-none
+                <label htmlFor="contact-name" className={`absolute left-5 transition-all duration-300 pointer-events-none
                   peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm
                   peer-focus:-top-2.5 peer-focus:text-xs peer-focus:px-2
                   peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:px-2
-                  ${isDark 
-                    ? 'text-gray-400 peer-focus:text-white peer-focus:bg-bg-dark' 
+                  ${isDark
+                    ? 'text-gray-400 peer-focus:text-white peer-focus:bg-bg-dark'
                     : 'text-text peer-focus:text-[#1c1c1c] peer-focus:bg-bg'
                   }
                 `}>
@@ -138,21 +139,22 @@ export default function Contact() {
               {/* Email Input */}
               <div className="relative">
                 <input
+                  id="contact-email"
                   type="email"
                   placeholder=" "
                   className={`peer w-full h-14 rounded-xl border px-5 text-sm outline-none transition-all duration-300 bg-transparent
-                    ${isDark 
-                      ? 'border-white/20 text-white focus:border-white placeholder:text-transparent' 
+                    ${isDark
+                      ? 'border-white/20 text-white focus:border-white placeholder:text-transparent'
                       : 'border-[#1c1c1c]/20 text-[#1c1c1c] focus:border-[#1c1c1c] placeholder:text-transparent'
                     }
                   `}
                 />
-                <label className={`absolute left-5 transition-all duration-300 pointer-events-none
+                <label htmlFor="contact-email" className={`absolute left-5 transition-all duration-300 pointer-events-none
                   peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm
                   peer-focus:-top-2.5 peer-focus:text-xs peer-focus:px-2
                   peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:px-2
-                  ${isDark 
-                    ? 'text-gray-400 peer-focus:text-white peer-focus:bg-bg-dark' 
+                  ${isDark
+                    ? 'text-gray-400 peer-focus:text-white peer-focus:bg-bg-dark'
                     : 'text-text peer-focus:text-[#1c1c1c] peer-focus:bg-bg'
                   }
                 `}>
@@ -163,21 +165,22 @@ export default function Contact() {
               {/* Message Input */}
               <div className="relative">
                 <textarea
+                  id="contact-message"
                   placeholder=" "
                   rows={6}
                   className={`peer w-full rounded-xl border px-5 pt-4 text-sm outline-none transition-all duration-300 resize-none bg-transparent
-                    ${isDark 
-                      ? 'border-white/20 text-white focus:border-white placeholder:text-transparent' 
+                    ${isDark
+                      ? 'border-white/20 text-white focus:border-white placeholder:text-transparent'
                       : 'border-[#1c1c1c]/20 text-[#1c1c1c] focus:border-[#1c1c1c] placeholder:text-transparent'
                     }
                   `}
                 />
-                <label className={`absolute left-5 transition-all duration-300 pointer-events-none
+                <label htmlFor="contact-message" className={`absolute left-5 transition-all duration-300 pointer-events-none
                   peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm
                   peer-focus:-top-2.5 peer-focus:text-xs peer-focus:px-2
                   peer-not-placeholder-shown:-top-2.5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:px-2
-                  ${isDark 
-                    ? 'text-gray-400 peer-focus:text-white peer-focus:bg-bg-dark' 
+                  ${isDark
+                    ? 'text-gray-400 peer-focus:text-white peer-focus:bg-bg-dark'
                     : 'text-text peer-focus:text-[#1c1c1c] peer-focus:bg-bg'
                   }
                 `}>

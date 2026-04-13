@@ -258,6 +258,7 @@ function ImageCarousel({
       {/* Expand to lightbox */}
       {onOpenLightbox && !hasError && (
         <button
+          aria-label="Open fullscreen view"
           onClick={(e) => { e.stopPropagation(); onOpenLightbox(current); }}
           className={`absolute top-3 right-3 z-10 p-1.5 rounded-lg opacity-0 group-hover/carousel:opacity-100 transition-opacity
             ${isDark ? "bg-black/60 text-white hover:bg-black/80" : "bg-white/80 text-[#1c1c1c] hover:bg-white"}
@@ -271,6 +272,7 @@ function ImageCarousel({
       {screenshots.length > 1 && (
         <>
           <button
+            aria-label="Previous screenshot"
             onClick={prev}
             className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full opacity-0 group-hover/carousel:opacity-100 transition-all duration-200
               ${isDark ? "bg-black/60 text-white hover:bg-black/80" : "bg-white/80 text-[#1c1c1c] hover:bg-white"}
@@ -279,6 +281,7 @@ function ImageCarousel({
             <ChevronLeft size={16} />
           </button>
           <button
+            aria-label="Next screenshot"
             onClick={next}
             className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full opacity-0 group-hover/carousel:opacity-100 transition-all duration-200
               ${isDark ? "bg-black/60 text-white hover:bg-black/80" : "bg-white/80 text-[#1c1c1c] hover:bg-white"}
@@ -288,15 +291,18 @@ function ImageCarousel({
           </button>
 
           {/* Dot indicators */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
             {screenshots.map((_, i) => (
               <button
                 key={i}
+                aria-label={`Go to screenshot ${i + 1}`}
                 onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
-                className={`h-1.5 rounded-full transition-all duration-300
-                  ${i === current ? "w-4 bg-white" : "w-1.5 bg-white/50"}
-                `}
-              />
+                className={`w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300`}
+              >
+                <span className={`block rounded-full transition-all duration-300
+                  ${i === current ? "w-4 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/50"}
+                `} />
+              </button>
             ))}
           </div>
 
@@ -387,6 +393,7 @@ function Lightbox({
       <div className="absolute top-4 left-0 right-0 flex items-center justify-between px-6 z-10">
         <span className="text-white/70 text-sm">{title} — {current + 1} / {screenshots.length}</span>
         <button
+          aria-label="Close lightbox"
           onClick={onClose}
           className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
         >
@@ -412,12 +419,14 @@ function Lightbox({
         {screenshots.length > 1 && (
           <>
             <button
+              aria-label="Previous screenshot"
               onClick={prev}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
             >
               <ChevronLeft size={24} />
             </button>
             <button
+              aria-label="Next screenshot"
               onClick={next}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
             >
@@ -433,6 +442,7 @@ function Lightbox({
           {screenshots.map((src, i) => (
             <button
               key={i}
+              aria-label={`View screenshot ${i + 1}`}
               onClick={() => setCurrent(i)}
               className={`shrink-0 w-20 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200
                 ${i === current ? "border-white" : "border-white/20 opacity-50 hover:opacity-75"}
@@ -487,6 +497,7 @@ function ProjectModal({
         >
           {/* Close */}
           <button
+            aria-label="Close project detail"
             onClick={onClose}
             className={`absolute top-4 right-4 z-20 p-2 rounded-full transition-colors
               ${isDark ? "bg-white/10 text-white hover:bg-white/20" : "bg-black/10 text-[#1c1c1c] hover:bg-black/20"}
