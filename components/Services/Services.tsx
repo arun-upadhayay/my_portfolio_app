@@ -277,7 +277,7 @@ export default function Services() {
           <p className={`mb-6 transition-colors duration-500
             ${isDark ? 'text-gray-400' : 'text-text'}
           `}>
-            Let's discuss your project requirements and build something amazing together.
+            Let&apos;s discuss your project requirements and build something amazing together.
           </p>
           <a 
             href="#contact"
