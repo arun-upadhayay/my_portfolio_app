@@ -137,7 +137,7 @@ export default function CTASection() {
             ${isDark ? 'text-gray-400' : 'text-text'}
           `}
         >
-          Let's collaborate and bring your ideas to life. I'm available for freelance projects, 
+          Let&apos;s collaborate and bring your ideas to life. I&apos;m available for freelance projects, 
           full-time positions, and consulting opportunities.
         </motion.p>
 

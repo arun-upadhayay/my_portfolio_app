@@ -7,7 +7,6 @@ import Portfolio from "@/components/Portfolio/Portfolio";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 import BackgroundDecorations from "@/components/BackgroundDecorations";
-import Header from "@/components/Header/Header";
 import CTASection from "@/components/CTASection/page";
 
 export default function Page() {

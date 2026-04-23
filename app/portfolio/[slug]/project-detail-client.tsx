@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -61,10 +62,12 @@ function ImageGallery({ images, title, isDark }: { images: string[]; title: stri
             <span className="text-xs">Screenshot {active + 1}</span>
           </div>
         ) : (
-          <img
+          <Image
             src={images[active]}
             alt={`${title} — screenshot ${active + 1}`}
-            className="w-full h-full object-cover object-top"
+            fill
+            sizes="(max-width: 768px) 100vw, 900px"
+            className="object-cover object-top"
             onError={() => setHasError((prev) => ({ ...prev, [active]: true }))}
           />
         )}
@@ -87,7 +90,7 @@ function ImageGallery({ images, title, isDark }: { images: string[]; title: stri
                   : "border-[#1c1c1c]/15 opacity-50 hover:opacity-70"
               }`}
             >
-              <img src={src} alt="" className="w-full h-full object-cover object-top" />
+              <Image src={src} alt="" width={80} height={48} className="w-full h-full object-cover object-top" />
             </button>
           ))}
         </div>

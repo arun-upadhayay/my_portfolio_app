@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, X, ChevronLeft, ChevronRight, Images, Maximize2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -78,10 +79,12 @@ function ImageCarousel({
               <span className="text-[10px] opacity-60">Add to /public/projects/{title.toLowerCase().replace(/\s+/g, "-")}/</span>
             </div>
           ) : (
-            <img
+            <Image
               src={screenshots[current]}
               alt={`${title} — screenshot ${current + 1}`}
-              className="w-full h-full object-cover object-top"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-top"
               onError={() => setImgError((prev) => ({ ...prev, [current]: true }))}
             />
           )}
@@ -180,7 +183,7 @@ function ThumbnailStrip({
             }
           `}
         >
-          <img src={src} alt={`thumb ${i + 1}`} className="w-full h-full object-cover object-top" />
+          <Image src={src} alt={`thumb ${i + 1}`} width={64} height={40} className="w-full h-full object-cover object-top" />
         </button>
       ))}
     </div>
@@ -237,16 +240,22 @@ function Lightbox({
       {/* Image */}
       <div className="relative max-w-6xl w-full" onClick={(e) => e.stopPropagation()}>
         <AnimatePresence mode="wait" initial={false}>
-          <motion.img
+          <motion.div
             key={current}
-            src={screenshots[current]}
-            alt={`${title} ${current + 1}`}
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.2 }}
-            className="w-full h-auto max-h-[75vh] object-contain rounded-xl"
-          />
+            className="relative w-full h-[75vh]"
+          >
+            <Image
+              src={screenshots[current]}
+              alt={`${title} ${current + 1}`}
+              fill
+              sizes="100vw"
+              className="object-contain rounded-xl"
+            />
+          </motion.div>
         </AnimatePresence>
 
         {screenshots.length > 1 && (
@@ -281,7 +290,7 @@ function Lightbox({
                 ${i === current ? "border-white" : "border-white/20 opacity-50 hover:opacity-75"}
               `}
             >
-              <img src={src} alt="" className="w-full h-full object-cover object-top" />
+              <Image src={src} alt="" width={80} height={48} className="w-full h-full object-cover object-top" />
             </button>
           ))}
         </div>

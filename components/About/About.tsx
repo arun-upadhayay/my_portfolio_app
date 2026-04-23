@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Award, Briefcase, Headphones, Download } from "lucide-react";
@@ -37,17 +38,22 @@ export default function About() {
       <div className="max-w-7xl mx-auto sm:px-6 grid gap-14 lg:gap-16 lg:grid-cols-[380px_1fr] items-center">
         {/* IMAGE */}
         <div className="relative mx-auto lg:mx-0 w-full max-w-xs sm:max-w-sm">
-          <img
-            src="/assets/about.jpg"
-            alt="About"
-            className={`w-full aspect-4/5 object-cover rounded-3xl
-              ${
-                isDark
-                  ? "shadow-[0_0_0_10px_rgba(255,255,255,0.05)]"
-                  : "shadow-[0_0_0_10px_rgba(0,0,0,0.05)]"
-              }
-            `}
-          />
+          <div className="relative w-full aspect-[4/5]">
+            <Image
+              src="/assets/about.jpg"
+              alt="About"
+              fill
+              priority
+              sizes="(max-width: 640px) 100vw, 380px"
+              className={`object-cover rounded-3xl
+                ${
+                  isDark
+                    ? "shadow-[0_0_0_10px_rgba(255,255,255,0.05)]"
+                    : "shadow-[0_0_0_10px_rgba(0,0,0,0.05)]"
+                }
+              `}
+            />
+          </div>
 
           {/* Decorative blur */}
           <div
