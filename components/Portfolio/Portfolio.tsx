@@ -1,177 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { ArrowRight, ExternalLink, X, ChevronLeft, ChevronRight, Images, Maximize2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-
-// ─── Project Data ───────────────────────────────────────────────────────────
-// Drop screenshots into /public/projects/<slug>/ and list them here.
-// Aspect ratio: 16:9 recommended (1280×720 or 1920×1080).
-const projects = [
-  {
-    id: 1,
-    slug: "shree-deepak-industries",
-    title: "Shree Deepak Industries",
-    category: "web",
-    projectType: "Client Website",
-    screenshots: [
-      "/projects/shree-deepak-industries/1.png",
-      "/projects/shree-deepak-industries/2.png",
-      "/projects/shree-deepak-industries/3.png",
-    ],
-    description:
-      "Corporate manufacturing website focused on trust, catalog clarity, and lead generation for industrial buyers.",
-    demo: "https://shreedeepakindustries.com/",
-    tags: ["Business Website", "Responsive UI", "SEO", "Lead Forms"],
-    impact: "Built for credibility and inquiry-focused conversions.",
-    results: [
-      { label: "Lighthouse", value: "95+" },
-      { label: "Mobile First", value: "100%" },
-      { label: "Lead Flow", value: "Optimized" },
-    ],
-    featured: true,
-  },
-  {
-    id: 2,
-    slug: "deepak-roofing",
-    title: "Deepak Roofing",
-    category: "web",
-    projectType: "Client Website",
-    screenshots: [
-      "/projects/deepak-roofing/1.png",
-      "/projects/deepak-roofing/2.png",
-      "/projects/deepak-roofing/3.png",
-    ],
-    description:
-      "Service-focused roofing website designed to communicate offerings quickly and drive local business enquiries.",
-    demo: "https://www.deepakroofing.com/",
-    tags: ["Service Website", "Mobile UX", "Performance", "Conversion"],
-    impact: "Structured for faster user decisions and better service discovery.",
-    results: [
-      { label: "Page Speed", value: "Fast" },
-      { label: "Service Clarity", value: "High" },
-      { label: "CTA Placement", value: "Strategic" },
-    ],
-    featured: false,
-  },
-  {
-    id: 3,
-    slug: "stakehub-product",
-    title: "StakeHub Product",
-    category: "app",
-    projectType: "Product Platform",
-    screenshots: [
-      "/projects/stakehub-product/1.png",
-      "/projects/stakehub-product/2.png",
-      "/projects/stakehub-product/3.png",
-      "/projects/stakehub-product/4.png",
-    ],
-    description:
-      "Product-facing experience for StakeHub that presents platform capabilities with a clean, task-oriented flow.",
-    demo: "https://product.stakehub.in/",
-    tags: ["Product UI", "Dashboard Flow", "SaaS", "Frontend"],
-    impact: "Focused on onboarding clarity and feature communication.",
-    results: [
-      { label: "UX Flow", value: "Streamlined" },
-      { label: "Feature Discovery", value: "Improved" },
-      { label: "Onboarding", value: "Clear" },
-    ],
-    caseStudy: true,
-    featured: true,
-  },
-  {
-    id: 4,
-    slug: "stakehub-main",
-    title: "StakeHub Main Platform",
-    category: "app",
-    projectType: "Brand + Product",
-    screenshots: [
-      "/projects/stakehub-main/1.png",
-      "/projects/stakehub-main/2.png",
-      "/projects/stakehub-main/3.png",
-    ],
-    description:
-      "Core StakeHub web presence highlighting product direction, positioning, and value proposition.",
-    demo: "https://stakehub.in/",
-    tags: ["Brand Website", "Product Positioning", "Marketing", "Web App"],
-    impact: "Strengthened brand narrative across product and marketing touchpoints.",
-    results: [
-      { label: "Brand Consistency", value: "Strong" },
-      { label: "Messaging", value: "Clear" },
-      { label: "Product Intent", value: "Focused" },
-    ],
-    featured: true,
-  },
-  {
-    id: 7,
-    slug: "nakshatra-jyotish",
-    title: "Nakshatra Jyotish",
-    category: "app",
-    projectType: "Product Platform",
-    screenshots: [
-      "/projects/nakshatra-jyotish/1.png",
-      "/projects/nakshatra-jyotish/2.png",
-      "/projects/nakshatra-jyotish/3.png",
-    ],
-    description:
-      "Astrology product website focused on spiritual guidance journeys, clear service presentation, and trust-building storytelling.",
-    demo: "https://nakshatra-jyotish.vercel.app/",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    impact: "Crafted to improve service discovery and user confidence through a calm, conversion-focused experience.",
-    results: [
-      { label: "UX", value: "Guided" },
-      { label: "Performance", value: "Fast" },
-      { label: "Deployment", value: "Vercel" },
-    ],
-    featured: true,
-  },
-  {
-    id: 5,
-    slug: "studynotion-lms",
-    title: "StudyNotion – LMS",
-    category: "personal",
-    projectType: "Personal Project",
-    screenshots: [
-      "/projects/studynotion-lms/1.png",
-      "/projects/studynotion-lms/2.png",
-      "/projects/studynotion-lms/3.png",
-    ],
-    description:
-      "Full-stack learning management system enabling instructors to create courses and students to purchase, enroll, and track learning progress with integrated payments.",
-    demo: "https://github.com/arun-upadhayay/",
-    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Auth", "Payments"],
-    impact: "End-to-end LMS with role-based access, payment integration, and real-time progress tracking.",
-    results: [
-      { label: "Stack", value: "MERN" },
-      { label: "Auth", value: "JWT + RBAC" },
-      { label: "Payments", value: "Integrated" },
-    ],
-    featured: false,
-  },
-  {
-    id: 6,
-    slug: "stocks-watchlist",
-    title: "Stocks Watchlist Dashboard",
-    category: "personal",
-    projectType: "Personal Project",
-    screenshots: [
-      "/projects/stocks-watchlist/1.png",
-      "/projects/stocks-watchlist/2.png",
-    ],
-    description:
-      "Responsive stock watchlist dashboard with real-time data visualization, interactive charts, and toggle views for Balance Sheet and Cash Flow financial metrics.",
-    demo: "https://github.com/arun-upadhayay/",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "ECharts", "PostgreSQL"],
-    impact: "Optimized data fetching and reduced re-renders for smooth real-time financial data display.",
-    results: [
-      { label: "Charts", value: "ECharts" },
-      { label: "TypeScript", value: "Full" },
-      { label: "Performance", value: "Optimized" },
-    ],
-    featured: false,
-  },
-];
+import { projects, type Project } from "@/lib/projects";
 
 const filters = [
   { key: "all", label: "All Projects" },
@@ -179,8 +13,6 @@ const filters = [
   { key: "app", label: "Products" },
   { key: "personal", label: "Personal Projects" },
 ];
-
-type Project = (typeof projects)[0];
 
 // ─── Image Carousel ──────────────────────────────────────────────────────────
 function ImageCarousel({
@@ -594,7 +426,7 @@ function ProjectModal({
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 mb-3">
               <a
                 href={project.demo}
                 target="_blank"
@@ -617,6 +449,14 @@ function ProjectModal({
                 Build Similar
               </a>
             </div>
+            <Link
+              href={`/portfolio/${project.slug}`}
+              className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-2xl text-xs font-medium border transition-all
+                ${isDark ? "border-white/12 text-white/50 hover:text-white/80 hover:bg-white/5" : "border-[#1c1c1c]/10 text-[#1c1c1c]/45 hover:text-[#1c1c1c]/70 hover:bg-[#1c1c1c]/3"}
+              `}
+            >
+              View Full Case Study <ArrowRight size={12} />
+            </Link>
           </div>
         </motion.div>
       </motion.div>
@@ -802,13 +642,15 @@ function ProjectCard({
           <p className={`text-xs ${isDark ? "text-white/45" : "text-[#1c1c1c]/45"}`}>
             Hover card to preview stack
           </p>
-          <div
-            className={`inline-flex items-center gap-1.5 text-xs font-medium
+          <Link
+            href={`/portfolio/${project.slug}`}
+            onClick={(e) => e.stopPropagation()}
+            className={`inline-flex items-center gap-1.5 text-xs font-medium transition-opacity hover:opacity-100
               ${isDark ? "text-white/70" : "text-[#1c1c1c]/70"}
             `}
           >
-            Open Details <ArrowRight size={14} />
-          </div>
+            Full Details <ArrowRight size={14} />
+          </Link>
         </div>
 
         <div className="mt-3 md:hidden">
