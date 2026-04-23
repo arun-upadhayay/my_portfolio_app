@@ -41,6 +41,7 @@ const projects = [
     screenshots: [
       "/projects/deepak-roofing/1.png",
       "/projects/deepak-roofing/2.png",
+      "/projects/deepak-roofing/3.png",
     ],
     description:
       "Service-focused roofing website designed to communicate offerings quickly and drive local business enquiries.",
