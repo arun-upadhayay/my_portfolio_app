@@ -3,6 +3,7 @@
 import { ArrowDown, Send } from "lucide-react";
 import { AiOutlineDiscord } from "react-icons/ai";
 import { FaInstagram, FaSquareGithub, FaSquareXTwitter } from "react-icons/fa6";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -79,12 +80,16 @@ export default function Home() {
 
           {/* RIGHT – IMAGE */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div
-              className="w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full
-                bg-[url('/assets/about.jpg')] bg-cover bg-center animate-profile
-                shadow-[0_0_0_8px_rgba(0,0,0,0.08)]
-                dark:shadow-[0_0_0_8px_rgba(255,255,255,0.08)]"
-            />
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden animate-profile shadow-[0_0_0_8px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_8px_rgba(255,255,255,0.08)]">
+              <Image
+                src="/assets/about.jpg"
+                alt="Arun Upadhayay, full-stack developer"
+                fill
+                priority
+                sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 320px"
+                className="object-cover object-center"
+              />
+            </div>
           </div>
         </div>
 

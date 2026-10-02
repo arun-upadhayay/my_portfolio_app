@@ -16,11 +16,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Arun Upadhayay | Full Stack Software Engineer",
+    default: "Arun Upadhayay | Full Stack Developer",
     template: "%s | Arun Upadhayay",
   },
   description:
-    "Professional portfolio of Arun Upadhayay, a Full Stack Software Engineer specializing in React, Next.js, Node.js, and modern web technologies.",
+    "Portfolio of Arun Upadhayay, a full-stack developer building production web applications with React, Next.js, Node.js, TypeScript, and PostgreSQL.",
 
   keywords: [
     "Arun Upadhayay",
@@ -39,21 +39,21 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://arunupadhayay.in"),
 
   alternates: {
-    canonical: "https://arunupadhayay.in",
+    canonical: "/",
   },
 
   openGraph: {
-    title: "Arun Upadhayay | Full Stack Software Engineer",
+    title: "Arun Upadhayay | Full Stack Developer",
     description:
-      "Portfolio of Arun Upadhayay — Full Stack Software Engineer building modern, scalable web applications.",
+      "Portfolio of Arun Upadhayay, a full-stack developer building production web applications with React, Next.js, Node.js, TypeScript, and PostgreSQL.",
     url: "https://arunupadhayay.in",
     siteName: "Arun Upadhayay Portfolio",
     images: [
       {
-        url: "/og.png",
+        url: "/assets/about.jpg",
         width: 1200,
         height: 630,
-        alt: "Arun Upadhayay | Full Stack Software Engineer",
+        alt: "Arun Upadhayay, full-stack developer",
       },
     ],
     locale: "en_US",
@@ -62,10 +62,10 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Arun Upadhayay | Full Stack Software Engineer",
+    title: "Arun Upadhayay | Full Stack Developer",
     description:
-      "Full Stack Software Engineer specializing in Next.js, React, and backend systems.",
-    images: ["/og.png"],
+      "Full-stack developer portfolio featuring React, Next.js, Node.js, TypeScript, and backend systems.",
+    images: ["/assets/about.jpg"],
   },
 
   robots: {
@@ -131,25 +131,6 @@ export default function RootLayout({
                 name: "Arun Upadhayay",
               },
               inLanguage: "en",
-            }),
-          }}
-        />
-
-        {/* Breadcrumb schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: "https://arunupadhayay.in",
-                },
-              ],
             }),
           }}
         />

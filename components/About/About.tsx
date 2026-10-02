@@ -41,7 +41,7 @@ export default function About() {
           <div className="relative w-full aspect-[4/5]">
             <Image
               src="/assets/about.jpg"
-              alt="About"
+              alt="Arun Upadhayay working as a full-stack developer"
               fill
               priority
               sizes="(max-width: 640px) 100vw, 380px"

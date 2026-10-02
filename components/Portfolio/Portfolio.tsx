@@ -55,6 +55,15 @@ function ImageCarousel({
 
   const hasError = imgError[current];
 
+  if (screenshots.length === 0) {
+    return (
+      <div className={`relative w-full ${aspectClass} overflow-hidden bg-black/10 flex flex-col items-center justify-center gap-2 ${isDark ? "text-white/30" : "text-[#1c1c1c]/30"}`}>
+        <Images size={32} strokeWidth={1.5} />
+        <span className="text-xs font-medium">Project preview unavailable</span>
+      </div>
+    );
+  }
+
   return (
     <div className={`relative w-full ${aspectClass} overflow-hidden bg-black/10 group/carousel`}>
       {/* Image */}
@@ -160,11 +169,13 @@ function ImageCarousel({
 // ─── Thumbnail Strip ─────────────────────────────────────────────────────────
 function ThumbnailStrip({
   screenshots,
+  title,
   current,
   onSelect,
   isDark,
 }: {
   screenshots: string[];
+  title: string;
   current: number;
   onSelect: (i: number) => void;
   isDark: boolean;
@@ -183,7 +194,7 @@ function ThumbnailStrip({
             }
           `}
         >
-          <Image src={src} alt={`thumb ${i + 1}`} width={64} height={40} className="w-full h-full object-cover object-top" />
+          <Image src={src} alt={`${title} screenshot thumbnail ${i + 1}`} width={64} height={40} className="w-full h-full object-cover object-top" />
         </button>
       ))}
     </div>
@@ -290,7 +301,7 @@ function Lightbox({
                 ${i === current ? "border-white" : "border-white/20 opacity-50 hover:opacity-75"}
               `}
             >
-              <Image src={src} alt="" width={80} height={48} className="w-full h-full object-cover object-top" />
+              <Image src={src} alt={`${title} screenshot thumbnail ${i + 1}`} width={80} height={48} className="w-full h-full object-cover object-top" />
             </button>
           ))}
         </div>
@@ -363,6 +374,7 @@ function ProjectModal({
           <div className={`px-6 pt-3 pb-1 ${isDark ? "bg-surface-dark" : "bg-white"}`}>
             <ThumbnailStrip
               screenshots={project.screenshots}
+              title={project.title}
               current={carouselIndex}
               onSelect={setCarouselIndex}
               isDark={isDark}

@@ -9,6 +9,13 @@ import Footer from "@/components/Footer/Footer";
 import BackgroundDecorations from "@/components/BackgroundDecorations";
 import CTASection from "@/components/CTASection/page";
 
+export const metadata = {
+  title: { absolute: "Arun Upadhayay | Full Stack Developer" },
+  description:
+    "Portfolio of Arun Upadhayay, a full-stack developer building production web applications with React, Next.js, Node.js, TypeScript, and PostgreSQL.",
+  alternates: { canonical: "/" },
+};
+
 export default function Page() {
   return (
     <>

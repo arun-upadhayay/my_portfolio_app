@@ -145,12 +145,7 @@ export const projects: Project[] = [
     title: "StakeHub Product",
     category: "app",
     projectType: "Product Platform",
-    screenshots: [
-      "/projects/stakehub-product/1.png",
-      "/projects/stakehub-product/2.png",
-      "/projects/stakehub-product/3.png",
-      "/projects/stakehub-product/4.png",
-    ],
+    screenshots: [],
     description:
       "Product-facing experience for StakeHub that presents platform capabilities with a clean, task-oriented flow.",
     demo: "https://product.stakehub.in/",
@@ -407,11 +402,7 @@ export const projects: Project[] = [
     title: "StudyNotion – LMS",
     category: "personal",
     projectType: "Personal Project",
-    screenshots: [
-      "/projects/studynotion-lms/1.png",
-      "/projects/studynotion-lms/2.png",
-      "/projects/studynotion-lms/3.png",
-    ],
+    screenshots: [],
     description:
       "Full-stack learning management system enabling instructors to create courses and students to purchase, enroll, and track learning progress with integrated payments.",
     demo: "https://github.com/arun-upadhayay/",
@@ -431,10 +422,7 @@ export const projects: Project[] = [
     title: "Stocks Watchlist Dashboard",
     category: "personal",
     projectType: "Personal Project",
-    screenshots: [
-      "/projects/stocks-watchlist/1.png",
-      "/projects/stocks-watchlist/2.png",
-    ],
+    screenshots: [],
     description:
       "Responsive stock watchlist dashboard with real-time data visualization, interactive charts, and toggle views for Balance Sheet and Cash Flow financial metrics.",
     demo: "https://github.com/arun-upadhayay/",
